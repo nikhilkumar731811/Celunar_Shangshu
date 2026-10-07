@@ -131,12 +131,12 @@ bool MuiroStartAttack::keyInput()
 		}
 		else if(ch=='M' || ch =='m')
 		{
-			MuiroDetails muiro;
-			muiro.display();
+			MuiroDetails muiro; // this is show the detials of the main character.
+			muiro.display(); // this is a temporary object it is destroyed after function end.
 		}
 		else if (ch == 'N' || ch == 'n')
 		{
-			Scene1Story scene1;
+			Scene1Story scene1;   // this is show the combat controls of the game.
 			scene1.getKeyboardButton();
 		}
 		else
