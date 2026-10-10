@@ -35,14 +35,20 @@ void MuiroDetails::getHealth()
 {
 	cout << "The health of the main character is: " << health << endl;
 }
-void MuiroDetails::setScene1LastHealth(int scene1LastHealth)
+void MuiroDetails::increseHealth()
 {
-	this->scene1LastHealth = 500; // this is the last health of the main character in scene 1.
+	health += 200; // this is the health increment of the main character.
+	cout << "Health recovered +200 'HP'" << endl;
+	cout << " Muiro's current health is: " << health << endl;
 }
-void MuiroDetails::getScene1LastHealth()
-{
-	cout << "Health is incremented 300 to: " << scene1LastHealth << endl;
-}
+//void MuiroDetails::setScene1LastHealth(int scene1LastHealth)
+//{
+//	this->scene1LastHealth = 500; // this is the last health of the main character in scene 1.
+//}
+//void MuiroDetails::getScene1LastHealth()
+//{
+//	cout << "Health is incremented 300 to: " << scene1LastHealth << endl;
+//}
 
 void MuiroDetails::display()
 {
@@ -81,6 +87,7 @@ bool MuiroStartAttack::keyInput()
 				cout << setw(78) << "<-------------------------------------------->" << endl;
 				cout << setw(68) << "          You defeated the demon!" << endl;
 				cout << setw(78) << "<-------------------------------------------->" << endl;
+				increseHealth(); // this is used to increase the health of the main character after defeating the demon.
 				return true;
 			}
 
@@ -98,6 +105,7 @@ bool MuiroStartAttack::keyInput()
 				cout << setw(78) << "<-------------------------------------------->" << endl;
 				cout << setw(68) << "          You defeated the demon!" << endl;
 				cout << setw(78) << "<-------------------------------------------->" << endl;
+				increseHealth(); // this is used to increase the health of the main character after defeating the demon.
 				return true;
 			}
 
@@ -117,6 +125,7 @@ bool MuiroStartAttack::keyInput()
 					cout << setw(78) << "<-------------------------------------------->" << endl;
 					cout << setw(68) << "          You defeated the demon!" << endl;
 					cout << setw(78) << "<-------------------------------------------->" << endl;
+					increseHealth(); // this is used to increase the health of the main character after defeating the demon.
 					return true;
 				}
 
@@ -150,7 +159,7 @@ bool MuiroStartAttack::keyInput()
 
 void MuiroStartAttack::getAttackName()
 {
-	lastAttack = steady_clock::now();
+	lastAttack = steady_clock::now(); 
 	bool isDemonDefeated = false;
 
 
@@ -190,7 +199,7 @@ void Scene1Story::scene1Story1()
 
 	cout << story1 << endl
 		<< endl;
-	this_thread::sleep_for(chrono::seconds(9)); // this is used to pause the program for 9 seconds.
+	this_thread::sleep_for(chrono::seconds(1)); // this is used to pause the program for 9 seconds.
 }
 void Scene1Story::scene1Story2()
 {
@@ -211,7 +220,7 @@ void Scene1Story::scene1Story2()
 		"Blood drips from the demon's mouth and stains the ground beneath it.\n";
 	cout << story2 << endl
 		<< endl;
-	this_thread::sleep_for(chrono::seconds(15));
+	this_thread::sleep_for(chrono::seconds(1));
 }
 void Scene1Story::scene1Story3(MuiroDetails& muiro)
 {
@@ -225,12 +234,12 @@ void Scene1Story::scene1Story3(MuiroDetails& muiro)
 		"this creature is trying to kill him.\n";
 	cout << story3 << endl<< endl;
 	cout << "The demon's grip finally weakens. Muiro breaks free, but the struggle costs him 100 HP." << endl<<endl;
-	this_thread::sleep_for(chrono::seconds(12));
+	this_thread::sleep_for(chrono::seconds(1));
 	
 	muiro.display();
-	this_thread::sleep_for(chrono::seconds(3));
+	this_thread::sleep_for(chrono::seconds(1));
 	getKeyboardButton();
-	this_thread::sleep_for(chrono::seconds(5));
+	this_thread::sleep_for(chrono::seconds(1));
 	system("cls");
 
 	cout<<setw(98) << "The struggle for survival begins..." << endl;
@@ -292,6 +301,8 @@ void FirstDemon::demonAttack(MuiroDetails& muiro)
 			cout << setw(78) << "<--------------------------------------------------->" << endl;
 			cout << setw(70) << "   You have been defeated by the demon!" << endl;
 			cout << setw(78) << "<--------------------------------------------------->" << endl;
+			//cout <<  muiro.health << endl; // this is only printed to check function is working or not
+			//cout << vHealth << endl;
 			return;
 		}
 		cout << "Demon attacked! with the damage: " << vDamage << " ----> Your remaining health: " << muiro.health << endl;

@@ -17,8 +17,9 @@ public:
 	void getName();
 	void getRankName();
 	void getHealth();
-	void setScene1LastHealth(int scene1LastHealth);
-	void getScene1LastHealth();
+	void increseHealth();
+	//void setScene1LastHealth(int scene1LastHealth);
+	//void getScene1LastHealth();
 	void display();
 };
 
