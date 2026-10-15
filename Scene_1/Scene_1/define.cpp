@@ -1,9 +1,11 @@
 #include "Muiro_details_declaration.h" // this is the header file.
+#include "Scene1SaveSystem.h"
 #include <iostream>
 #include <string>
 #include <conio.h> // this library is used for keyboard input functions.
 #include <iomanip> // this library is used for manipulator.
 #include <thread>
+
 
 #include <chrono> // this library is used for time and date functions.
 using namespace std;
@@ -39,7 +41,7 @@ void MuiroDetails::increseHealth()
 {
 	health += 200; // this is the health increment of the main character.
 	cout << "Health recovered +200 'HP'" << endl;
-	cout << " Muiro's current health is: " << health << endl;
+	cout << "Muiro's current health is: " << health << endl;
 }
 //void MuiroDetails::setScene1LastHealth(int scene1LastHealth)
 //{
@@ -49,17 +51,18 @@ void MuiroDetails::increseHealth()
 //{
 //	cout << "Health is incremented 300 to: " << scene1LastHealth << endl;
 //}
+void MuiroDetails::allSetFunction() {
+	setName("MUIRO");
+	setRankName("D"); // D is the lowest rank in this game.
+	setHealth(300); // this is the starting health of the main character.
+}
 
 void MuiroDetails::display()
 {
-	setName("MUIRO");
-	setRankName("D"); // D is the lowest rank in this game.
-	setHealth(300);   // this is the starting health of the main character.
 	getName();
 	getRankName();
 	getHealth();
-	cout << endl
-		<< endl;
+	cout << endl<< endl;
 }
 
 // here is the implementation of the MuiroStartAttack class.
@@ -157,7 +160,7 @@ bool MuiroStartAttack::keyInput()
 	return true; // this is used here because the function is returning a boolean value, and it will return true if the player has not quit the game.
 }
 
-void MuiroStartAttack::getAttackName()
+bool MuiroStartAttack::getAttackName()
 {
 	lastAttack = steady_clock::now(); 
 	bool isDemonDefeated = false;
@@ -184,6 +187,9 @@ void MuiroStartAttack::getAttackName()
 
 		demonAttack(*this); // Call the demonAttack function to attack the player
 	}
+		return vHealth <= 0;
+	
+	
 }
 
 // here is the implementation of the Scene1Story class.
@@ -254,6 +260,7 @@ void Scene1Story::getKeyboardButton()
 	cout<<setw(98) << "Press 'S/s'  ----> Straight Punch  ----> Damage: 50" << endl;
 	cout<<setw(98) << "Press 'D/d'  ---->  Side Kick      ----> Damage: 70" << endl;
 	cout<<setw(80) << "Press 'X/x'  ---->  Quit the game" << endl;
+	cout << setw(80) << "Press 'M/m'  ---->  Muiro details" << endl;
 
 	cout<<setw(103) << "-------------------------------------------------------------" << endl;
 	cout << endl<<endl;
@@ -264,6 +271,13 @@ void Scene1Story::scene1StoryShow(MuiroDetails& muiro)
 	scene1Story1();
 	scene1Story2();
 	scene1Story3(muiro);
+}
+
+void Scene1Story::completeScene1(MuiroDetails& muiro) {
+	Scene1SaveSystem saveSystem;
+	cout << "Scene1 complete" << endl;
+	saveSystem.saveHealth(muiro);
+
 }
 
 // here is the implementation of the FirstDemon class.
@@ -287,8 +301,8 @@ void FirstDemon::show()
 }
 void FirstDemon::demonAttack(MuiroDetails& muiro)
 {
-	auto current = steady_clock::now();
-	auto elapsed = duration_cast<seconds>(current - lastAttack).count();
+	auto currentAttack = steady_clock::now();
+	auto elapsed = duration_cast<seconds>(currentAttack - lastAttack).count();
 
 	if (elapsed >= 3)
 	{
@@ -306,6 +320,6 @@ void FirstDemon::demonAttack(MuiroDetails& muiro)
 			return;
 		}
 		cout << "Demon attacked! with the damage: " << vDamage << " ----> Your remaining health: " << muiro.health << endl;
-		lastAttack = current;
+		lastAttack = currentAttack;
 	}
 }

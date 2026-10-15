@@ -20,6 +20,7 @@ public:
 	void increseHealth();
 	//void setScene1LastHealth(int scene1LastHealth);
 	//void getScene1LastHealth();
+	void allSetFunction();
 	void display();
 };
 
@@ -47,6 +48,7 @@ class Scene1Story
 public:
 	void scene1Story1();
 	void scene1Story2();
+	void completeScene1(MuiroDetails& muiro);
 	void getKeyboardButton();
 	void scene1Story3(MuiroDetails& muiro);
 	void scene1StoryShow(MuiroDetails& muiro);
@@ -64,5 +66,5 @@ class MuiroStartAttack : public MuiroDetails, public FirstDemon,public Scene1Sto
 public:
 	bool keyInput();
 	void setAttackName();
-	void getAttackName();
+	bool getAttackName();
 };
