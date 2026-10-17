@@ -60,6 +60,7 @@ class MuiroStartAttack : public MuiroDetails, public FirstDemon,public Scene1Sto
 	char ch;
 	int damage;
 	int finalHealth;
+	bool isPaused = false;
 	
 	
 
@@ -67,4 +68,6 @@ public:
 	bool keyInput();
 	void setAttackName();
 	bool getAttackName();
+	void isGamePaused();
+	void checkSceneCompletion();
 };

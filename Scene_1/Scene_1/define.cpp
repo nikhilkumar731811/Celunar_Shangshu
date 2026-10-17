@@ -62,7 +62,7 @@ void MuiroDetails::display()
 	getName();
 	getRankName();
 	getHealth();
-	cout << endl<< endl;
+	cout << endl << endl;
 }
 
 // here is the implementation of the MuiroStartAttack class.
@@ -151,6 +151,12 @@ bool MuiroStartAttack::keyInput()
 			Scene1Story scene1;   // this is show the combat controls of the game.
 			scene1.getKeyboardButton();
 		}
+		else if (ch == '+') {
+			isPaused = true;
+			cout << setw(103) << "\033[31mThe game is paused, for continue press: Minus (-)\033[0m" << endl;
+
+		}
+
 		else
 		{
 			cout << "Invalid input keys. Please press 'S/s' or 'D/d'." << endl;
@@ -159,26 +165,58 @@ bool MuiroStartAttack::keyInput()
 
 	return true; // this is used here because the function is returning a boolean value, and it will return true if the player has not quit the game.
 }
+void MuiroStartAttack::isGamePaused() {
+	while (isPaused) {
+		if (_kbhit()) {
+			ch = _getch();
+			if (ch == '-') {
+				isPaused = false;
+				lastAttack = steady_clock::now();
+				cout << setw(90) << "\033[35m<----Game Resumed---->\033[0m" << endl;
+			}
+			else {
+				cout << "invalid keys please press minus (-) to resumed game." << endl;
+			}
+		}
+		//this_thread::sleep_for(milliseconds(30)); // we can write it as ---> this_thread::sleep_for(chrono::milliseconds(value)). but when we used using namespace std::chrono, then no need to write it as long.
+
+	}
+
+}
+void MuiroStartAttack::checkSceneCompletion() {
+
+	bool demonDefeated = getAttackName();
+
+	if (demonDefeated)
+	{
+		Scene1Story scene1;
+		scene1.completeScene1(*this);
+	}
+}
+
 
 bool MuiroStartAttack::getAttackName()
 {
-	lastAttack = steady_clock::now(); 
-	bool isDemonDefeated = false;
+	lastAttack = steady_clock::now();
+	bool isDemonDefeated = false; // this is a flag to use to print one time message F/f to finish move.
 
 
 	while (health > 0 && vHealth > 0)
 	{
+
 		if (vHealth <= 200 && !isDemonDefeated)
 
 		{
 
 			// \033[31m Set the text color to red
-			cout<< right<<setw(103) << "\033[31mPress 'F/f' <---- Finish move ---->\033[0m" << endl;
+			cout << right << setw(103) << "\033[31mPress 'F/f' <---- Finish move ---->\033[0m" << endl;
 			// \033[0m Reset the color to defaul
 
 			isDemonDefeated = true; // Set the flag to true to indicate that the demon can be
 
 		}
+
+		isGamePaused(); // this is checking when you paused game this check you pressed or not the key to resume.
 
 		if (!keyInput()) // Call the keyInput function to get the player's input
 		{
@@ -186,10 +224,11 @@ bool MuiroStartAttack::getAttackName()
 		}
 
 		demonAttack(*this); // Call the demonAttack function to attack the player
+
 	}
-		return vHealth <= 0;
-	
-	
+	return vHealth <= 0;
+
+
 }
 
 // here is the implementation of the Scene1Story class.
@@ -238,32 +277,34 @@ void Scene1Story::scene1Story3(MuiroDetails& muiro)
 		"For a moment, everything goes silent.\n\n"
 		"He realizes...\n"
 		"this creature is trying to kill him.\n";
-	cout << story3 << endl<< endl;
-	cout << "The demon's grip finally weakens. Muiro breaks free, but the struggle costs him 100 HP." << endl<<endl;
+	cout << story3 << endl << endl;
+	cout << "The demon's grip finally weakens. Muiro breaks free, but the struggle costs him 100 HP." << endl << endl;
 	this_thread::sleep_for(chrono::seconds(1));
-	
+
 	muiro.display();
-	this_thread::sleep_for(chrono::seconds(1));
+	this_thread::sleep_for(chrono::seconds(1)); // we can also write it as ----> this_thread::sleep_for(second(value)); <---- but we need using namespace std::chrono;
 	getKeyboardButton();
 	this_thread::sleep_for(chrono::seconds(1));
 	system("cls");
 
-	cout<<setw(98) << "The struggle for survival begins..." << endl;
+	cout << setw(98) << "The struggle for survival begins..." << endl;
 }
 void Scene1Story::getKeyboardButton()
 {
 	keyboardButton = "Combat Controls";
 
 	cout << keyboardButton << endl;
-	cout<<setw(103) << "-------------------------------------------------------------" << endl;
+	cout << setw(103) << "-------------------------------------------------------------" << endl;
 
-	cout<<setw(98) << "Press 'S/s'  ----> Straight Punch  ----> Damage: 50" << endl;
-	cout<<setw(98) << "Press 'D/d'  ---->  Side Kick      ----> Damage: 70" << endl;
-	cout<<setw(80) << "Press 'X/x'  ---->  Quit the game" << endl;
+	cout << setw(98) << "Press 'S/s'  ----> Straight Punch  ----> Damage: 50" << endl;
+	cout << setw(98) << "Press 'D/d'  ---->  Side Kick      ----> Damage: 70" << endl;
+	cout << setw(80) << "Press 'X/x'  ---->  Quit the game" << endl;
 	cout << setw(80) << "Press 'M/m'  ---->  Muiro details" << endl;
+	cout << setw(83) << "Press 'N/n'  ---->  Keyboard Details" << endl;
+	cout << setw(78) << "Press '+'    ---->  Game Paused" << endl;
 
-	cout<<setw(103) << "-------------------------------------------------------------" << endl;
-	cout << endl<<endl;
+	cout << setw(103) << "-------------------------------------------------------------" << endl;
+	cout << endl << endl;
 }
 
 void Scene1Story::scene1StoryShow(MuiroDetails& muiro)
