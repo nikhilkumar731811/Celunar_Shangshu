@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="define.cpp" />
+    <ClCompile Include="Scene1SaveSystem.cpp" />
     <ClCompile Include="Scene_1.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Muiro_details_declaration.h" />
+    <ClInclude Include="Scene1SaveSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
