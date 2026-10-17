@@ -141,10 +141,10 @@ bool MuiroStartAttack::keyInput()
 			cout << "You have quit the game." << endl;
 			return false; // this will break the loop and exit the game.
 		}
-		else if(ch=='M' || ch =='m')
+		else if (ch == 'M' || ch == 'm')
 		{
-			MuiroDetails muiro; // this is show the detials of the main character.
-			muiro.display(); // this is a temporary object it is destroyed after function end.
+			// this is show the detials of the main character.
+			display();
 		}
 		else if (ch == 'N' || ch == 'n')
 		{
