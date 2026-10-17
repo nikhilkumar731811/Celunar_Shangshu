@@ -4,3 +4,15 @@
 **/Release/
 *.user
 *.suo
+# Scene 2 - temporarily exclude
+/Scene_2/
+
+# Scene 3 - temporarily exclude
+/Scene_3/
+
+# Scene 2 and Scene 3 solution files
+/Scene_2.slnx
+/Scene_3.slnx
+
+# Scene 1 saved health data
+/Scene_1/Scene_1/scene1_save.txt

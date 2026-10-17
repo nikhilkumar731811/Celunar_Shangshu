@@ -13,11 +13,7 @@ int main()
     a.scene1StoryShow(a);
     
     a.checkSceneCompletion();
-    //bool demonDefeated = a.getAttackName();
-    //if (demonDefeated)
-    //{
-    //    a.completeScene1(a); 
-    //}
+    
     
 
     // this is original code
