@@ -151,9 +151,10 @@ bool MuiroStartAttack::keyInput()
 			Scene1Story scene1;   // this is show the combat controls of the game.
 			scene1.getKeyboardButton();
 		}
-		else if (ch == '+') {
+		else if (ch == 32) // this is checking is spacebar pressed or not 32 is interger value of spacebar. spacebar is not a char key so we needed to campare its interger value.
+		{
 			isPaused = true;
-			cout << setw(103) << "\033[31mThe game is paused, for continue press: Minus (-)\033[0m" << endl;
+			cout << setw(103) << "\033[31mThe game is paused, for continue press: (Spacebar)\033[0m" << endl;
 
 		}
 
@@ -169,13 +170,14 @@ void MuiroStartAttack::isGamePaused() {
 	while (isPaused) {
 		if (_kbhit()) {
 			ch = _getch();
-			if (ch == '-') {
+			if (ch == 32) // this is also checking spacebar key 
+			{
 				isPaused = false;
 				lastAttack = steady_clock::now();
 				cout << setw(90) << "\033[35m<----Game Resumed---->\033[0m" << endl;
 			}
 			else {
-				cout << "invalid keys please press minus (-) to resumed game." << endl;
+				cout << "invalid keys please press (Spacebar) to resumed game." << endl;
 			}
 		}
 		//this_thread::sleep_for(milliseconds(30)); // we can write it as ---> this_thread::sleep_for(chrono::milliseconds(value)). but when we used using namespace std::chrono, then no need to write it as long.
@@ -301,7 +303,7 @@ void Scene1Story::getKeyboardButton()
 	cout << setw(80) << "Press 'X/x'  ---->  Quit the game" << endl;
 	cout << setw(80) << "Press 'M/m'  ---->  Muiro details" << endl;
 	cout << setw(83) << "Press 'N/n'  ---->  Keyboard Details" << endl;
-	cout << setw(78) << "Press '+'    ---->  Game Paused" << endl;
+	cout << setw(82) << "Press 'Spacebar' ---->  Game Paused" << endl;
 
 	cout << setw(103) << "-------------------------------------------------------------" << endl;
 	cout << endl << endl;

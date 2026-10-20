@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-
 #include <chrono>
 
 class MuiroDetails
@@ -54,15 +53,15 @@ public:
 	void scene1StoryShow(MuiroDetails& muiro);
 };
 
-class MuiroStartAttack : public MuiroDetails, public FirstDemon,public Scene1Story
+class MuiroStartAttack : public MuiroDetails, public FirstDemon, public Scene1Story
 {
 	std::string attackName[3];
 	char ch;
 	int damage;
 	int finalHealth;
 	bool isPaused = false;
-	
-	
+
+
 
 public:
 	bool keyInput();

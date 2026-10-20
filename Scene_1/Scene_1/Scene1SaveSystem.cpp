@@ -22,7 +22,7 @@ void Scene1SaveSystem::saveHealth(const MuiroDetails& muiro) {
 	}
 }
 
-bool Scene1SaveSystem::loadHealth( MuiroDetails& muiro) {
+bool Scene1SaveSystem::loadHealth(MuiroDetails& muiro) {
 	ifstream savefile("scene1_save.txt");
 	if (!savefile.is_open()) {
 		cout << "no save file found" << endl;
