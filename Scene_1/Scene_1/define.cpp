@@ -153,7 +153,7 @@ bool MuiroStartAttack::keyInput()
 		}
 		else if (ch == 32) // this is checking is spacebar pressed or not 32 is interger value of spacebar. spacebar is not a char key so we needed to campare its interger value.
 		{
-			isPaused = true;
+			isPaused = true; // this is a flag to check another key when game is paused 
 			cout << setw(103) << "\033[31mThe game is paused, for continue press: (Spacebar)\033[0m" << endl;
 
 		}
@@ -172,7 +172,7 @@ void MuiroStartAttack::isGamePaused() {
 			ch = _getch();
 			if (ch == 32) // this is also checking spacebar key 
 			{
-				isPaused = false;
+				isPaused = false; // this is flag also but its work is terminate the while loop and resume the game.
 				lastAttack = steady_clock::now();
 				cout << setw(90) << "\033[35m<----Game Resumed---->\033[0m" << endl;
 			}
@@ -366,3 +366,4 @@ void FirstDemon::demonAttack(MuiroDetails& muiro)
 		lastAttack = currentAttack;
 	}
 }
+
