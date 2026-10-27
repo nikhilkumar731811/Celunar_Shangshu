@@ -140,10 +140,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="define.cpp" />
+    <ClCompile Include="InventorySystem.cpp" />
     <ClCompile Include="Scene1SaveSystem.cpp" />
     <ClCompile Include="Scene_1.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="InventorySystem.h" />
     <ClInclude Include="Muiro_details_declaration.h" />
     <ClInclude Include="Scene1SaveSystem.h" />
   </ItemGroup>
