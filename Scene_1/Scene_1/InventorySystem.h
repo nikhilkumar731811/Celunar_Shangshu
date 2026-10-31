@@ -13,6 +13,12 @@ struct InventoryItem {
 
 class InventorySystem {
 	std::vector<InventoryItem> items;
-	void add(const InventoryItem& item);
+	int maxCapacity;
+public:
+	void addItem(const InventoryItem& item);
+	InventorySystem(int Capacity); // this is constructor
+	void displayInventory();
+	void removeItem(const std::string& itemName, const std::string& itemType,int gameplayValue, int amount);
+
 
 };	
