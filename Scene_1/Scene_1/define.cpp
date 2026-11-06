@@ -1,5 +1,7 @@
 #include "Muiro_details_declaration.h" // this is the header file.
 #include "Scene1SaveSystem.h"
+#include"WeaponDetailsSystem.h"
+#include "InventorySystem.h"
 #include <iostream>
 #include <string>
 #include <conio.h> // this library is used for keyboard input functions.
@@ -157,6 +159,7 @@ bool MuiroStartAttack::keyInput()
 			cout << setw(103) << "\033[31mThe game is paused, for continue press: (Spacebar)\033[0m" << endl;
 
 		}
+		
 
 		else
 		{
@@ -191,8 +194,14 @@ void MuiroStartAttack::checkSceneCompletion() {
 
 	if (demonDefeated)
 	{
+		WeaponDetailsSystem weaponSystem;
+		InventorySystem inventory(5);
+
+		WeaponDropSystem weaponDropSystem(weaponSystem, inventory);
+
 		Scene1Story scene1;
-		scene1.completeScene1(*this);
+
+		scene1.completeScene1(*this, weaponDropSystem, inventory);
 	}
 }
 
@@ -316,10 +325,16 @@ void Scene1Story::scene1StoryShow(MuiroDetails& muiro)
 	scene1Story3(muiro);
 }
 
-void Scene1Story::completeScene1(MuiroDetails& muiro) {
+void Scene1Story::completeScene1(MuiroDetails& muiro, WeaponDropSystem& weaponDropSystem, InventorySystem& inventory) {
+	cout << "\nScene 1: Weapon Drop\n" << endl;
+
+	weaponDropSystem.dropKnife();
+
 	Scene1SaveSystem saveSystem;
-	cout << "Scene1 complete" << endl;
-	saveSystem.saveHealth(muiro);
+
+	saveSystem.saveScene1(muiro, inventory);
+
+	cout << "\nScene 1 completed successfully!" << endl;
 
 }
 
@@ -347,7 +362,7 @@ void FirstDemon::demonAttack(MuiroDetails& muiro)
 	auto currentAttack = steady_clock::now();
 	auto elapsed = duration_cast<seconds>(currentAttack - lastAttack).count();
 
-	if (elapsed >= 3)
+	if (elapsed >= 2)
 	{
 		muiro.health -= vDamage;
 		if (muiro.health <= 0)

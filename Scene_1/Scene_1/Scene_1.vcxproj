@@ -143,11 +143,13 @@
     <ClCompile Include="InventorySystem.cpp" />
     <ClCompile Include="Scene1SaveSystem.cpp" />
     <ClCompile Include="Scene_1.cpp" />
+    <ClCompile Include="WeaponDetailsSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InventorySystem.h" />
     <ClInclude Include="Muiro_details_declaration.h" />
     <ClInclude Include="Scene1SaveSystem.h" />
+    <ClInclude Include="WeaponDetailsSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -43,6 +43,11 @@ void InventorySystem::displayInventory() {
 	}
 }
 
+// vector<InventoryItem>& this is data type of getItems() funtion. it returns the reference of the items vector.
+const vector<InventoryItem>& InventorySystem::getItems() const {
+	return items;
+}
+
 void InventorySystem::removeItem(const string& itemName, const std::string& itemType,int gameplayValue, int amount) {
 	for (int i = 0; i < items.size(); i++) {
 		if (items[i].itemName == itemName && items[i].itemType == itemType && items[i].gameplayValue == gameplayValue) {
@@ -57,4 +62,13 @@ void InventorySystem::removeItem(const string& itemName, const std::string& item
 		}
 	}
 	cout << "Item Not Found" << endl;
+}
+
+bool InventorySystem::findItem(const std::string& itemName, const std::string& itemType, int gameplayValue) {
+	for (const auto& item : items) {
+		if (item.itemName == itemName && item.itemType == itemType && item.gameplayValue == gameplayValue) {
+			return true; // Item found
+		}
+	}
+	return false; // Item not found
 }

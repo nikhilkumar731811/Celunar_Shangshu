@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <chrono>
+class InventorySystem;
+class WeaponDropSystem;
 
 class MuiroDetails
 {
@@ -47,7 +49,7 @@ class Scene1Story
 public:
 	void scene1Story1();
 	void scene1Story2();
-	void completeScene1(MuiroDetails& muiro);
+	void completeScene1(MuiroDetails& muiro,WeaponDropSystem& weaponDropSystem,InventorySystem& inventory);
 	void getKeyboardButton();
 	void scene1Story3(MuiroDetails& muiro);
 	void scene1StoryShow(MuiroDetails& muiro);
